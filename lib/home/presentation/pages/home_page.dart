@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_weather_manager/home/presentation/cubit/home_cubit.dart';
 import 'package:task_weather_manager/home/presentation/cubit/home_state.dart';
 import 'package:task_weather_manager/home/presentation/widgets/home_button.dart';
+import 'package:task_weather_manager/tasks/presentation/pages/edit_tasks_page.dart';
 import 'package:task_weather_manager/tasks/presentation/pages/tasks_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -32,8 +33,11 @@ class HomeView extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
-        key: const Key('homeView_addTodo_floatingActionButton'),
-        onPressed: () => (),
+          // onPressed: () => Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => EditTasksPage()),
+          // ),
+        onPressed: () => Navigator.of(context).push(EditTasksPage.route()),
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomAppBar(

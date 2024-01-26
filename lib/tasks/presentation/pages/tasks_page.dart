@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_weather_manager/tasks/data/repositories/overview_tasks_repository.dart';
+import 'package:task_weather_manager/tasks/presentation/pages/edit_tasks_page.dart';
 import 'package:task_weather_manager/tasks/presentation/state/tasks_bloc/tasks_bloc.dart';
 import 'package:task_weather_manager/tasks/presentation/widgets/tasks_filter_button.dart';
 import 'package:task_weather_manager/tasks/presentation/widgets/tasks_list.dart';
@@ -116,7 +117,9 @@ class TasksView extends StatelessWidget {
                         context.read<TasksBloc>().add(TasksDeleted(task));
                       },
                       onTap: () {
-                        // Navigator.of(context).push(EditTodoPage.route(initialTodo: task),);
+                        Navigator.of(context).push(
+                          EditTasksPage.route(initialTasks: task),
+                        );
                       },
                     ),
                 ],

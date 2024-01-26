@@ -17,12 +17,15 @@ class TasksData extends Equatable {
   final bool isCompleted;
 
   TasksData({
-    required String id,
     required this.title,
+    String? id,
     this.description = '',
     this.isCompleted = false,
-  })  : assert(id.isNotEmpty, 'id must not be empty'),
-        id = id.isNotEmpty ? id : const Uuid().v4();
+  })  : assert(
+          id == null || id.isNotEmpty,
+          'id must be null or not empty',
+        ),
+        id = id ?? const Uuid().v4();
 
   TasksData copyWith({
     String? id,

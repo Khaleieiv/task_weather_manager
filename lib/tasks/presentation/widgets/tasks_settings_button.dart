@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_weather_manager/tasks/presentation/state/tasks_bloc/tasks_bloc.dart';
 
+enum TasksOption { clearCompleted }
+
 class TasksSettingButton extends StatelessWidget {
   const TasksSettingButton({super.key});
 
@@ -11,7 +13,7 @@ class TasksSettingButton extends StatelessWidget {
     final hasTodos = tasks.isNotEmpty;
     final completedTodosAmount = tasks.where((todo) => todo.isCompleted).length;
 
-    return PopupMenuButton(
+    return PopupMenuButton<TasksOption>(
       tooltip: "Setting",
       icon: const Icon(
         Icons.edit_rounded,
@@ -25,6 +27,7 @@ class TasksSettingButton extends StatelessWidget {
       itemBuilder: (BuildContext context) {
         return [
           PopupMenuItem(
+            value: TasksOption.clearCompleted,
             enabled: hasTodos && completedTodosAmount > 0,
             child: const Text("Clear completed"),
           ),
