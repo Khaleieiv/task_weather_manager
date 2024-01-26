@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_weather_manager/home/presentation/cubit/home_cubit.dart';
 import 'package:task_weather_manager/home/presentation/cubit/home_state.dart';
+import 'package:task_weather_manager/home/presentation/widgets/home_button.dart';
+import 'package:task_weather_manager/tasks/presentation/pages/tasks_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -25,13 +27,13 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       body: IndexedStack(
         index: selectedTab.index,
-        children: const [/*TodosOverviewPage(), StatsPage()*/],
+        children: const [TasksPage()],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
         key: const Key('homeView_addTodo_floatingActionButton'),
-        onPressed: () => ()/*Navigator.of(context).push(EditTodoPage.route())*/ ,
+        onPressed: () => (),
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomAppBar(
@@ -39,44 +41,19 @@ class HomeView extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _HomeTabButton(
+            HomeButton(
               groupValue: selectedTab,
               value: HomeTab.todos,
               icon: const Icon(Icons.list_rounded),
             ),
-            _HomeTabButton(
+            HomeButton(
               groupValue: selectedTab,
               value: HomeTab.stats,
-              icon: const Icon(Icons.show_chart_rounded),
+              icon: const Icon(Icons.sunny_snowing),
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class _HomeTabButton extends StatelessWidget {
-  const _HomeTabButton({
-    required this.groupValue,
-    required this.value,
-    required this.icon,
-  });
-
-  final HomeTab groupValue;
-  final HomeTab value;
-  final Widget icon;
-
-  @override
-  Widget build(BuildContext context) {
-    const iconSize = 32.0;
-
-    return IconButton(
-      onPressed: () => context.read<HomeCubit>().setTab(value),
-      iconSize: iconSize,
-      color:
-      groupValue != value ? null : Theme.of(context).colorScheme.secondary,
-      icon: icon,
     );
   }
 }

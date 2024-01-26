@@ -27,14 +27,13 @@ class TasksState extends Equatable {
       status: status != null ? status() : this.status,
       tasks: tasks != null ? tasks() : this.tasks,
       filter: filter != null ? filter() : this.filter,
-      lastDeletedTask: lastDeletedTask != null ? lastDeletedTask() : this
-          .lastDeletedTask,
+      lastDeletedTask:
+          lastDeletedTask != null ? lastDeletedTask() : this.lastDeletedTask,
     );
   }
 
   @override
-  List<Object?> get props =>
-      [
+  List<Object?> get props => [
         status,
         tasks,
         filter,

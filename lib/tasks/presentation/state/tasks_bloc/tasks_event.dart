@@ -12,8 +12,8 @@ final class TasksSubscription extends TasksEvent {
   const TasksSubscription();
 }
 
-final class TasksTodoCompletion extends TasksEvent {
-  const TasksTodoCompletion({
+final class TasksCompletion extends TasksEvent {
+  const TasksCompletion({
     required this.task,
     required this.isCompleted,
   });
@@ -41,7 +41,7 @@ final class TasksUndoDeletion extends TasksEvent {
 class TasksFilter extends TasksEvent {
   const TasksFilter(this.filter);
 
-  final TasksFilter filter;
+  final TaskFilter filter;
 
   @override
   List<Object> get props => [filter];
