@@ -11,11 +11,11 @@ Future<void> main() async {
   final tasksApi = TasksPreferences(
     plugin: await SharedPreferences.getInstance(),
   );
-  final todosRepository = OverviewTasksRepository(tasksRepository: tasksApi);
+  final tasksRepository = OverviewTasksRepository(tasksRepository: tasksApi);
 
   runApp(
     Main(
-      tasksRepository: todosRepository,
+      tasksRepository: tasksRepository,
     ),
   );
 }
@@ -23,7 +23,10 @@ Future<void> main() async {
 class Main extends StatelessWidget {
   final OverviewTasksRepository tasksRepository;
 
-  const Main({required this.tasksRepository, super.key});
+  const Main({
+    required this.tasksRepository,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
