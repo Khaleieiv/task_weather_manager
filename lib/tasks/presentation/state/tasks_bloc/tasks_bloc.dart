@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_weather_manager/tasks/data/repositories/overview_tasks_repository.dart';
 import 'package:task_weather_manager/tasks/domain/entities/tasks/tasks_data.dart';
+import 'package:task_weather_manager/tasks/utils/category_filter.dart';
 import 'package:task_weather_manager/tasks/utils/task_filter.dart';
 
 part 'tasks_event.dart';
@@ -21,6 +22,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     on<TasksDeleted>(_onTasksDeleted);
     on<TasksUndoDeletion>(_onUndoDeletion);
     on<TasksFilter>(_onFilter);
+    on<CategoriesFilter>(_onCategory);
     on<TasksClearCompleted>(_onClearCompleted);
   }
 
@@ -77,6 +79,13 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     Emitter<TasksState> emit,
   ) {
     emit(state.copyWith(filter: () => event.filter));
+  }
+
+  void _onCategory(
+    CategoriesFilter event,
+    Emitter<TasksState> emit,
+  ) {
+    emit(state.copyWith(category: () => event.category));
   }
 
   Future<void> _onClearCompleted(

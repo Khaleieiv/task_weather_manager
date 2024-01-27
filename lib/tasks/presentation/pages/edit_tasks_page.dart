@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_weather_manager/tasks/data/repositories/overview_tasks_repository.dart';
 import 'package:task_weather_manager/tasks/domain/entities/tasks/tasks_data.dart';
 import 'package:task_weather_manager/tasks/presentation/state/edit_tasks_bloc/edit_tasks_bloc.dart';
+import 'package:task_weather_manager/tasks/presentation/widgets/custom_category_dropdown.dart';
 import 'package:task_weather_manager/tasks/presentation/widgets/custom_description_field.dart';
 import 'package:task_weather_manager/tasks/presentation/widgets/custom_title_field.dart';
 
@@ -28,7 +29,6 @@ class EditTasksPage extends StatelessWidget {
           tasksRepository: context.read<OverviewTasksRepository>(),
           initialTasks: initialTasks,
         ),
-
         child: const EditTasksPage(),
       ),
     );
@@ -69,7 +69,11 @@ class EditTasksView extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(16),
             child: Column(
-              children: [CustomTitleField(), CustomDescriptionField()],
+              children: [
+                CustomTitleField(),
+                CustomDescriptionField(),
+                CustomCategoryDropdown(),
+              ],
             ),
           ),
         ),

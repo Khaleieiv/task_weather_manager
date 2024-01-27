@@ -16,11 +16,13 @@ class EditTasksBloc extends Bloc<EditTasksEvent, EditTasksState> {
           EditTasksState(
             initialTasks: initialTasks,
             title: initialTasks?.title ?? '',
+            category: initialTasks?.category ?? '',
             description: initialTasks?.description ?? '',
           ),
         ) {
     on<EditTasksSubmitted>(_onSubmitted);
     on<EditTasksTitle>(_onTitleChanged);
+    on<EditTasksCategory>(_onCategoryChanged);
     on<EditTasksDescription>(_onDescriptionChanged);
   }
 
@@ -31,8 +33,10 @@ class EditTasksBloc extends Bloc<EditTasksEvent, EditTasksState> {
     Emitter<EditTasksState> emit,
   ) async {
     emit(state.copyWith(status: EditTasksStatus.loading));
-    final tasks = (state.initialTasks ?? TasksData(title: '')).copyWith(
+    final tasks =
+        (state.initialTasks ?? TasksData(title: '')).copyWith(
       title: state.title,
+      category: state.category,
       description: state.description,
     );
 
@@ -49,6 +53,13 @@ class EditTasksBloc extends Bloc<EditTasksEvent, EditTasksState> {
     Emitter<EditTasksState> emit,
   ) {
     emit(state.copyWith(title: event.title));
+  }
+
+  void _onCategoryChanged(
+      EditTasksCategory event,
+      Emitter<EditTasksState> emit,
+      ) {
+    emit(state.copyWith(category: event.category));
   }
 
   void _onDescriptionChanged(

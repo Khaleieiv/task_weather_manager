@@ -38,6 +38,15 @@ final class TasksUndoDeletion extends TasksEvent {
   const TasksUndoDeletion();
 }
 
+class CategoriesFilter extends TasksEvent {
+  const CategoriesFilter(this.category);
+
+  final CategoryFilter category;
+
+  @override
+  List<Object> get props => [category];
+}
+
 class TasksFilter extends TasksEvent {
   const TasksFilter(this.filter);
 
@@ -46,6 +55,7 @@ class TasksFilter extends TasksEvent {
   @override
   List<Object> get props => [filter];
 }
+
 
 class TasksClearCompleted extends TasksEvent {
   const TasksClearCompleted();

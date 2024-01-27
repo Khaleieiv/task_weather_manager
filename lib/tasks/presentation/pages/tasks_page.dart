@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_weather_manager/tasks/data/repositories/overview_tasks_repository.dart';
 import 'package:task_weather_manager/tasks/presentation/pages/edit_tasks_page.dart';
 import 'package:task_weather_manager/tasks/presentation/state/tasks_bloc/tasks_bloc.dart';
+import 'package:task_weather_manager/tasks/presentation/widgets/category_filter_button.dart';
 import 'package:task_weather_manager/tasks/presentation/widgets/tasks_filter_button.dart';
 import 'package:task_weather_manager/tasks/presentation/widgets/tasks_list.dart';
 import 'package:task_weather_manager/tasks/presentation/widgets/tasks_settings_button.dart';
+import 'package:task_weather_manager/tasks/utils/category_filter.dart';
 
 class TasksPage extends StatelessWidget {
   const TasksPage({super.key});
@@ -34,6 +36,7 @@ class TasksView extends StatelessWidget {
         ),
         backgroundColor: Colors.indigoAccent,
         actions: const [
+          CategoryFilterButton(),
           TasksFilterButton(),
           TasksSettingButton(),
         ],
@@ -103,15 +106,16 @@ class TasksView extends StatelessWidget {
               child: ListView(
                 children: [
                   for (final task in state.filteredTodos)
+                    if (state.category.apply(task))
                     TasksList(
                       task: task,
                       afterSwitchingDone: (isCompleted) {
                         context.read<TasksBloc>().add(
-                              TasksCompletion(
-                                task: task,
-                                isCompleted: isCompleted,
-                              ),
-                            );
+                          TasksCompletion(
+                            task: task,
+                            isCompleted: isCompleted,
+                          ),
+                        );
                       },
                       onDismissed: (_) {
                         context.read<TasksBloc>().add(TasksDeleted(task));
@@ -122,6 +126,7 @@ class TasksView extends StatelessWidget {
                         );
                       },
                     ),
+
                 ],
               ),
             );

@@ -20,6 +20,16 @@ final class EditTasksTitle extends EditTasksEvent {
   List<Object> get props => [title];
 }
 
+final class EditTasksCategory extends EditTasksEvent {
+  const EditTasksCategory(this.category);
+
+  final String category;
+
+  @override
+  List<Object> get props => [category];
+}
+
+
 final class EditTasksDescription extends EditTasksEvent {
   const EditTasksDescription(this.description);
 

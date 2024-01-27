@@ -32,34 +32,49 @@ class TasksList extends StatelessWidget {
           color: Colors.grey,
         ),
       ),
-      child: ListTile(
-        onTap: onTap,
-        title: Text(
-          task.title,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: !task.isCompleted
-              ? null
-              : const TextStyle(
-            color: Colors.indigoAccent,
-            decoration: TextDecoration.lineThrough,
+      child: Column(
+        children: [
+          Text(
+            task.category,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: !task.isCompleted
+                ? null
+                : const TextStyle(
+              color: Colors.indigoAccent,
+              decoration: TextDecoration.lineThrough,
+            ),
           ),
-        ),
-        subtitle: Text(
-          task.description,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        leading: Checkbox(
-          shape: const ContinuousRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
+          ListTile(
+            onTap: onTap,
+            title: Text(
+              task.title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: !task.isCompleted
+                  ? null
+                  : const TextStyle(
+                color: Colors.indigoAccent,
+                decoration: TextDecoration.lineThrough,
+              ),
+            ),
+            subtitle: Text(
+              task.description,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            leading: Checkbox(
+              shape: const ContinuousRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+              ),
+              value: task.isCompleted,
+              onChanged: afterSwitchingDone == null
+                  ? null
+                  : (value) => afterSwitchingDone!(value!),
+            ),
+            trailing: onTap == null ? null : const Icon(Icons.chevron_right),
           ),
-          value: task.isCompleted,
-          onChanged: afterSwitchingDone == null
-              ? null
-              : (value) => afterSwitchingDone!(value!),
-        ),
-        trailing: onTap == null ? null : const Icon(Icons.chevron_right),
+        ],
       ),
     );
   }

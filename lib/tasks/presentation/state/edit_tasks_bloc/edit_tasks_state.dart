@@ -7,12 +7,14 @@ final class EditTasksState extends Equatable {
     this.status = EditTasksStatus.initial,
     this.initialTasks,
     this.title = '',
+    this.category = '',
     this.description = '',
   });
 
   final EditTasksStatus status;
   final TasksData? initialTasks;
   final String title;
+  final String category;
   final String description;
 
   bool get isNewTasks => initialTasks == null;
@@ -21,12 +23,14 @@ final class EditTasksState extends Equatable {
     EditTasksStatus? status,
     TasksData? initialTasks,
     String? title,
+    String? category,
     String? description,
   }) {
     return EditTasksState(
       status: status ?? this.status,
       initialTasks: initialTasks ?? this.initialTasks,
       title: title ?? this.title,
+      category: category ?? this.category,
       description: description ?? this.description,
     );
   }
