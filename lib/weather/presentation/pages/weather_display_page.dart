@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:task_weather_manager/weather/domain/entities/weather_data.dart';
 
+/// WeatherDisplayPage is a StatelessWidget that displays weather information.
 class WeatherDisplayPage extends StatelessWidget {
+  // Weather data to be displayed on the page.
   final WeatherData weatherData;
 
+  // Constructor to initialize the WeatherDisplayPage with weatherData.
   const WeatherDisplayPage({required this.weatherData});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      // Container styling with padding and decoration.
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.lightBlueAccent,
         borderRadius: BorderRadius.circular(15),
       ),
+      // Column to organize weather information vertically.
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // Display temperature with styling.
           Text(
             'Temperature: ${weatherData.temperature}°F',
             style: const TextStyle(
@@ -26,6 +32,7 @@ class WeatherDisplayPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
+          // Display weather condition with styling.
           Text(
             'Weather Condition: ${weatherData.weatherCondition}',
             style: const TextStyle(
@@ -34,6 +41,7 @@ class WeatherDisplayPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
+          // Display humidity with styling using an icon.
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -49,6 +57,7 @@ class WeatherDisplayPage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
+          // Display wind speed with styling using an icon.
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -64,6 +73,7 @@ class WeatherDisplayPage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
+          // Display wind direction with styling using an icon.
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

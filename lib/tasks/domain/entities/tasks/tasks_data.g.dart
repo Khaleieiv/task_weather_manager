@@ -7,8 +7,9 @@ part of 'tasks_data.dart';
 // **************************************************************************
 
 TasksData _$TasksDataFromJson(Map<String, dynamic> json) => TasksData(
-      id: json['id'] as String,
       title: json['title'] as String,
+      category: json['category'] as String? ?? "",
+      id: json['id'] as String?,
       description: json['description'] as String? ?? '',
       isCompleted: json['isCompleted'] as bool? ?? false,
     );
@@ -18,4 +19,5 @@ Map<String, dynamic> _$TasksDataToJson(TasksData instance) => <String, dynamic>{
       'title': instance.title,
       'description': instance.description,
       'isCompleted': instance.isCompleted,
+      'category': instance.category,
     };

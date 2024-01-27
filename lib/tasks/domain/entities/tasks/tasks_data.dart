@@ -9,27 +9,27 @@ typedef JsonMap = Map<String, dynamic>;
 @JsonSerializable()
 class TasksData extends Equatable {
   final String id;
-
   final String title;
-
   final String description;
-
   final bool isCompleted;
+  final String category;
 
   TasksData({
     required this.title,
+    this.category = "",
     String? id,
     this.description = '',
     this.isCompleted = false,
   })  : assert(
-          id == null || id.isNotEmpty,
-          'id must be null or not empty',
-        ),
+  id == null || id.isNotEmpty,
+  'id must be null or not empty',
+  ),
         id = id ?? const Uuid().v4();
 
   TasksData copyWith({
     String? id,
     String? title,
+    String? category,
     String? description,
     bool? isCompleted,
   }) {
@@ -38,6 +38,7 @@ class TasksData extends Equatable {
       title: title ?? this.title,
       description: description ?? this.description,
       isCompleted: isCompleted ?? this.isCompleted,
+      category: category ?? this.category,
     );
   }
 
@@ -46,6 +47,5 @@ class TasksData extends Equatable {
   JsonMap toJson() => _$TasksDataToJson(this);
 
   @override
-  // TODO: implement props
-  List<Object?> get props => [id, title, description, isCompleted];
+  List<Object?> get props => [id, title, description, isCompleted, category];
 }

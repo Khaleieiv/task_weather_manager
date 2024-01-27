@@ -5,14 +5,19 @@ import 'package:task_weather_manager/home/presentation/pages/home_page.dart';
 import 'package:task_weather_manager/tasks/data/repositories/overview_tasks_repository.dart';
 import 'package:task_weather_manager/tasks/utils/tasks_preferences.dart';
 
+// The main function initializes the app and runs it.
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Create an instance of TasksPreferences using SharedPreferences.
   final tasksApi = TasksPreferences(
     plugin: await SharedPreferences.getInstance(),
   );
+
+  // Create an instance of OverviewTasksRepository with TasksPreferences.
   final tasksRepository = OverviewTasksRepository(tasksRepository: tasksApi);
 
+  // Run the app with the specified tasks repository.
   runApp(
     Main(
       tasksRepository: tasksRepository,
@@ -20,6 +25,7 @@ Future<void> main() async {
   );
 }
 
+// Main is a StatelessWidget that sets up the application structure.
 class Main extends StatelessWidget {
   final OverviewTasksRepository tasksRepository;
 
@@ -32,6 +38,7 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        // Provide the OverviewTasksRepository to the entire app.
         RepositoryProvider<OverviewTasksRepository>.value(
           value: tasksRepository,
         ),

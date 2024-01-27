@@ -7,11 +7,14 @@ import 'package:task_weather_manager/tasks/presentation/pages/edit_tasks_page.da
 import 'package:task_weather_manager/tasks/presentation/pages/tasks_page.dart';
 import 'package:task_weather_manager/weather/presentation/pages/weather_page.dart';
 
+// HomePage is the main entry point for the application,
+// providing a scaffold for the entire UI.
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Create a BlocProvider for managing the state using HomeCubit.
     return BlocProvider(
       create: (_) => HomeCubit(),
       child: const HomeView(),
@@ -19,24 +22,32 @@ class HomePage extends StatelessWidget {
   }
 }
 
+// HomeView represents the UI of the home screen,
+// including the bottom navigation and content.
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Get the selected tab from the HomeCubit state.
     final selectedTab = context.select((HomeCubit cubit) => cubit.state.tab);
 
     return Scaffold(
+      // Use IndexedStack to switch between different content
+      // based on the selected tab.
       body: IndexedStack(
         index: selectedTab.index,
-        children:  [TasksPage(), WeatherPage()],
+        children: [const TasksPage(), WeatherPage()],
       ),
+      // Configure the floating action button for adding tasks.
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
         onPressed: () => Navigator.of(context).push(EditTasksPage.route()),
         child: const Icon(Icons.add),
       ),
+      // Configure the bottom navigation bar using a
+      // custom HomeButton for each tab.
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         child: Row(
