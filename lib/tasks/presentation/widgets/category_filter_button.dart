@@ -29,10 +29,8 @@ class CategoryFilterButton extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
 
-      // Initial value selected in the popup menu.
       initialValue: activeCategory,
 
-      // Callback when a category is selected.
       onSelected: (category) {
         context.read<TasksBloc>().add(CategoriesFilter(category));
       },
